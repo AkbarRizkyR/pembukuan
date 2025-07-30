@@ -1,19 +1,18 @@
 package pembukuan.exo.com.entity;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "customer")
-public class Customer extends PanacheEntity {
+public class Customer extends PanacheEntityBase {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment
+    public Long id;
 
     @Column(nullable = false, length = 100)
     public String name;

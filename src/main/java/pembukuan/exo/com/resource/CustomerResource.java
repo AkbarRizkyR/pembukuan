@@ -26,9 +26,9 @@ public class CustomerResource {
 
     @GET
     @Path("/all")
-    @Operation(summary = "Get all customers", description = "Returns list of all customers")
-    public List<Customer> getAllCustomers() {
-        return service.getAll();
+    @Operation(summary = "Get all customers or search by keyword", description = "Returns all customers or filtered by keyword")
+    public List<Customer> getAllCustomers(@QueryParam("keyword") String keyword) {
+        return service.getAll(keyword);
     }
 
     @GET
@@ -77,7 +77,7 @@ public class CustomerResource {
     public Response deleteWithPost(@PathParam("id") Long id) {
         boolean deleted = service.delete(id);
         return deleted
-                ? Response.noContent().build()
+                ? Response.ok("Berhasil Menghapus").build()
                 : Response.status(Response.Status.NOT_FOUND)
                 .entity("Customer with id " + id + " not found")
                 .build();
