@@ -1,17 +1,26 @@
 package pembukuan.exo.com.service;
 
+import jakarta.inject.Inject;
 import pembukuan.exo.com.dto.CustomerDTO;
 import pembukuan.exo.com.entity.Customer;
 import jakarta.enterprise.context.ApplicationScoped;
+
 import jakarta.transaction.Transactional;
+import pembukuan.exo.com.repository.CustomerRepository;
+
 import java.util.List;
 import java.math.BigDecimal;
 
 @ApplicationScoped
 public class CustomerService {
-
-    public List<Customer> getAll() {
-        return Customer.listAll();
+    @Inject
+    CustomerRepository repository;
+    public List<Customer> getAll(String keyword) {
+        if (keyword != null && !keyword.isBlank()) {
+            return repository.searchByKeyword(keyword);
+        } else {
+            return repository.listAll();
+        }
     }
 
     public Customer getById(Long id) {
@@ -50,5 +59,7 @@ public class CustomerService {
     public boolean delete(Long id) {
         return Customer.deleteById(id);
     }
+
+
 
 }
