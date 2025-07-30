@@ -1,4 +1,4 @@
-package pembukuan.exo.com.util;
+package pembukuan.exo.com.utils;
 
 import io.smallrye.jwt.build.Jwt;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

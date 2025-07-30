@@ -3,7 +3,7 @@ package pembukuan.exo.com.service;
 import pembukuan.exo.com.dto.AdminUserDTO;
 import pembukuan.exo.com.entity.AdminUser;
 import pembukuan.exo.com.repository.AdminUserRepository;
-import pembukuan.exo.com.util.JwtUtils;
+import pembukuan.exo.com.utils.JwtUtils;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;

@@ -1,5 +1,6 @@
 package pembukuan.exo.com.resource;
 
+import io.quarkus.security.Authenticated;
 import pembukuan.exo.com.dto.CustomerDTO;
 import pembukuan.exo.com.entity.Customer;
 import pembukuan.exo.com.service.CustomerService;
@@ -26,6 +27,7 @@ public class CustomerResource {
 
     @GET
     @Path("/all")
+    @Authenticated
     @Operation(summary = "Get all customers or search by keyword", description = "Returns all customers or filtered by keyword")
     public List<Customer> getAllCustomers(@QueryParam("keyword") String keyword) {
         return service.getAll(keyword);
@@ -33,6 +35,7 @@ public class CustomerResource {
 
     @GET
     @Path("/detail/{id}")
+    @Authenticated
     @Operation(summary = "Get customer by ID", description = "Retrieve single customer by their ID")
     public Response getCustomerById(@PathParam("id") Long id) {
         Customer customer = service.getById(id);
@@ -46,6 +49,7 @@ public class CustomerResource {
 
     @POST
     @Path("/create")
+    @Authenticated
     @Operation(summary = "Create customer", description = "Create a new customer")
     public Response createCustomer(CustomerDTO dto) {
         if (dto.id != null) {
@@ -59,6 +63,7 @@ public class CustomerResource {
 
     @POST
     @Path("/update/{id}")
+    @Authenticated
     @Operation(summary = "Update customer using POST", description = "Update existing customer data by ID")
     public Response updateWithPost(@PathParam("id") Long id, CustomerDTO dto) {
         try {
@@ -73,6 +78,7 @@ public class CustomerResource {
 
     @POST
     @Path("/delete/{id}")
+    @Authenticated
     @Operation(summary = "Delete customer using POST", description = "Delete customer data by ID")
     public Response deleteWithPost(@PathParam("id") Long id) {
         boolean deleted = service.delete(id);
